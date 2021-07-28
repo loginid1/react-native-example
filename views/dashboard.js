@@ -1,6 +1,6 @@
 import React from 'react';
 import {useHistory} from 'react-router-native';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
 
 const Dashboard = ({loginid, username}) => {
   const history = useHistory();
@@ -11,6 +11,7 @@ const Dashboard = ({loginid, username}) => {
 
   return (
     <View style={styles.wrapper}>
+      <Image style={styles.logo} source={require('../imgs/logo.png')} />
       <Text style={styles.header}>{username} is logged in</Text>
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Log Out</Text>
@@ -20,6 +21,10 @@ const Dashboard = ({loginid, username}) => {
 };
 
 const styles = StyleSheet.create({
+  logo: {
+    width: '40%',
+    resizeMode: 'contain',
+  },
   header: {
     color: '#036ef9',
     fontSize: 25,

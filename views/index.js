@@ -7,6 +7,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 const Home = ({loginid, username, usernameHandler}) => {
@@ -68,6 +69,7 @@ const Home = ({loginid, username, usernameHandler}) => {
 
   return (
     <View style={styles.wrapper}>
+      <Image style={styles.logo} source={require('../imgs/logo.png')} />
       <TextInput
         style={styles.input}
         placeholder="Username"
@@ -96,6 +98,10 @@ const Home = ({loginid, username, usernameHandler}) => {
 };
 
 const styles = StyleSheet.create({
+  logo: {
+    width: '40%',
+    resizeMode: 'contain',
+  },
   header: {
     color: '#036ef9',
     fontSize: 25,
