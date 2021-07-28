@@ -1,12 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-native';
+import uuid from 'react-native-uuid';
 import {
   StyleSheet,
   Text,
@@ -15,9 +9,62 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const Home = () => {
-  const [username, setUsername] = useState('');
+const Home = ({loginid, username, usernameHandler}) => {
+  const history = useHistory();
   const [payload, setPayload] = useState('');
+
+  const handleRegister = async () => {
+    try {
+      const response = await loginid.registerWithFido2(username);
+      console.log(response);
+
+      if (response.success) {
+        history.push('/dashboard');
+      } else {
+        alert(response.errorMessage);
+      }
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
+  const handleAuthenticate = async () => {
+    try {
+      const response = await loginid.authenticateWithFido2(username);
+      console.log(response);
+
+      if (response.success) {
+        history.push('/dashboard');
+      } else {
+        alert(response.errorMessage);
+      }
+    } catch (e) {
+      alert(e.message);
+    }
+  };
+
+  const handleConfirmTx = async () => {
+    try {
+      const transactionPayload = {
+        data: payload,
+        nonce: uuid.v4(),
+      };
+      const response = await loginid.transactionConfirmation(
+        username,
+        transactionPayload,
+      );
+
+      if (response.success) {
+        alert(
+          `Transaction with payload: ${payload} has been created and confirmed:\n\n ${response.jwt}`,
+        );
+      } else {
+        alert(response.errorMessage);
+      }
+    } catch (e) {
+      alert(e.message);
+    }
+  };
 
   return (
     <View style={styles.wrapper}>
@@ -26,7 +73,7 @@ const Home = () => {
         placeholder="Username"
         placeholderTextColor="black"
         value={username}
-        onChangeText={text => setUsername(text)}
+        onChangeText={usernameHandler}
       />
       <TextInput
         style={styles.input}
@@ -35,13 +82,13 @@ const Home = () => {
         value={payload}
         onChangeText={text => setPayload(text)}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleAuthenticate}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleConfirmTx}>
         <Text style={styles.buttonText}>Confirm Transaction</Text>
       </TouchableOpacity>
     </View>
@@ -58,7 +105,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
   },
   input: {
     backgroundColor: '#ededed',
