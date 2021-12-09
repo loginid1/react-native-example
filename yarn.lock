@@ -940,10 +940,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@loginid/react-native-sdk@^0.65.26":
-  version "0.65.26"
-  resolved "https://registry.yarnpkg.com/@loginid/react-native-sdk/-/react-native-sdk-0.65.26.tgz#25c5649499a17d2f995cf4c8900e27d259226978"
-  integrity sha512-uTB3mO0qz4cbrTF0EqUxBqdFlpFRQRk8dLi7Cr33PYrC8TenJQPqXinZDQ1B7n5jQHr1NkghSzDPw2TUibXVeQ==
+"@loginid/react-native-sdk@^0.65.32":
+  version "0.65.32"
+  resolved "https://registry.yarnpkg.com/@loginid/react-native-sdk/-/react-native-sdk-0.65.32.tgz#694b1e19d61d878dde21d73ddb9f089f7c8d31f7"
+  integrity sha512-7Zzh68PbGW+euh8Fup4GIBHgllvDJLCC6ANuq6QTKvoslHiI99UG04+82NDm2jPnDSsjTzn282W5jcWr+ibuRg==
 
 "@react-native-community/cli-debugger-ui@^5.0.1":
   version "5.0.1"

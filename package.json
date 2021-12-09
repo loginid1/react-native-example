@@ -10,7 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@loginid/react-native-sdk": "^0.65.26",
+    "@loginid/react-native-sdk": "^0.65.32",
     "react": "17.0.1",
     "react-native": "0.64.2",
     "react-native-dotenv": "^3.1.1",
